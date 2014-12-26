@@ -49,7 +49,7 @@ var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
 var HTMLschoolMajor = '<em><br>Major: %data%</em>';
 
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
+var HTMLonlineClasses = '<br><h3>Online Classes</h3>';
 var HTMLonlineTitle = '<a href="#">%data%';
 var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
@@ -57,6 +57,17 @@ var HTMLonlineURL = '<br><a href="#">%data%</a>';
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
+
+//International Name Function
+function inName(name) {
+    name = name.trim();
+    split_name = name.split(" ");
+    first = split_name[0].toLowerCase();
+    last = split_name[1].toUpperCase();
+    first_let = first[0].toUpperCase();
+    first = first.slice(1);
+    return first_let + first + " " + last;
+}
 
 
 /*
@@ -86,6 +97,10 @@ function logClicks(x,y) {
 
 $(document).click(function(loc) {
   // your code goes here!
+    var x = loc.pageX;
+    var y = loc.pageY;
+    
+    logClicks(x,y);
 });
 
 
@@ -171,6 +186,7 @@ function initializeMap() {
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map,marker);
     });
 
     // this is where the pin actually gets added to the map.
